@@ -18,8 +18,8 @@ class ChatGPT {
 
   static GetStorage storage = GetStorage();
 
-  static String chatGptToken =
-      dotenv.env['OPENAI_CHATGPT_TOKEN'] ?? ''; // token
+  static String chatGptToken ="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";
+      //dotenv.env['OPENAI_CHATGPT_TOKEN'] ?? ''; // token
   static String defaultModel = 'gpt-3.5-turbo';
   static List defaultRoles = [
     'system',

@@ -30,7 +30,7 @@ class Config {
 
   static bool isInfiniteNumberVersion = true; // Unlimited frequency. Development and use
   static String appName = 'AI Chat';
-  static String contactEmail = '895535702@qq.com';
+  static String contactEmail = 'oanhcuongdo@gmail.com';
   static int watchAdApiCount = 3;
   static int appUserAdCount = 20; // Do not actively display advertisements if the number of times exceeds (redemption page)
 }
