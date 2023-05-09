@@ -175,7 +175,7 @@ class _ChatPageState extends State<ChatPage> {
                             ),
                             SizedBox(width: 12),
                             Text(
-                              "ChatGPT",
+                              "MatrixGPT",
                               style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
                                 fontSize: 18,
@@ -356,7 +356,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _renderMessageItem(Map message, int index) {
     String role = message['role'];
     String defaultAvatar = 'images/logo.png';
-    String defaultRoleName = 'ChatGPT';
+    String defaultRoleName = 'MatrixGPT';
     Color defaultColor = const Color.fromRGBO(229, 245, 244, 1);
     Color defaultTextColor = Colors.black;
     String defaultTextPrefix = '';

@@ -13,7 +13,7 @@ chat
   id: Uuid.v4(),
   ai: {
     type: "chat",
-    name: "AI Chat",
+    name: "MatrixGPT ",
     "isContinuous": false,
   },
   systemMessage: {

@@ -1,6 +1,6 @@
 ## ChatGPT Application with flutter
 
-ChatGPT发布了4.0版本，但未完全开放，目前AI Chat使用`gpt-3.5-turbo`模型。
+ChatGPT发布了4.0版本，但未完全开放，目前MatrixGPT 使用`gpt-3.5-turbo`模型。
 
 ### 软件截图
 
@@ -48,7 +48,7 @@ ChatGPT发布了4.0版本，但未完全开放，目前AI Chat使用`gpt-3.5-tur
 
 #### `flutter`
 
-- `3.*`版本，AI Chat编译时使用的是3.7.7版本.
+- `3.*`版本，MatrixGPT 编译时使用的是3.7.7版本.
 
 #### `ChatGPT Token` （必要的）
 

@@ -29,7 +29,7 @@ class Config {
   }
 
   static bool isInfiniteNumberVersion = true; // Unlimited frequency. Development and use
-  static String appName = 'AI Chat';
+  static String appName = 'MatrixGPT AI Consultant';
   static String contactEmail = 'oanhcuongdo@gmail.com';
   static int watchAdApiCount = 3;
   static int appUserAdCount = 20; // Do not actively display advertisements if the number of times exceeds (redemption page)

@@ -1,6 +1,6 @@
 ## ChatGPT Application with flutter
 
-ChatGPT has released version 4.0, but it is not fully open. Currently, AI Chat uses the `gpt-3.5-turbo` model.
+ChatGPT has released version 4.0, but it is not fully open. Currently, MatrixGPT  uses the `gpt-3.5-turbo` model.
 
 Chinese document: [Chinese](./README-CN.md)
 
@@ -50,7 +50,7 @@ At present, Android supports running on a real machine, and IOS has only been ru
 
 #### `flutter`
 
-- `3.*` version, AI Chat uses version 3.7.7 when compiling.
+- `3.*` version, MatrixGPT  uses version 3.7.7 when compiling.
 
 #### `ChatGPT Token` (required)
 

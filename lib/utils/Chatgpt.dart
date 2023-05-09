@@ -18,7 +18,7 @@ class ChatGPT {
 
   static GetStorage storage = GetStorage();
 
-  static String chatGptToken ="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";
+  static String chatGptToken ="";
       //dotenv.env['OPENAI_CHATGPT_TOKEN'] ?? ''; // token
   static String defaultModel = 'gpt-3.5-turbo';
   static List defaultRoles = [
@@ -30,22 +30,22 @@ class ChatGPT {
   static List chatModelList = [
     {
       "type": "chat",
-      "name": "AI Chat",
-      "desc": "Natural language chat, continuous conversation mode",
+      "name": "Cố vấn Ý tưởng Startup với MatrixGPT",
+      "desc": "Trao đổi, tra cứu thông tin và lên ý tưởng",
       "isContinuous": true,
       "content": "\nInstructions:"
           "\nYou are ChatGPT. The answer to each question should be as concise as possible. If you're making a list, don't have too many entries."
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "Can you write a poem?",
-        "Can you write a joke?",
-        "Help me plan a trip",
+        "Lên ý tưởng kinh doanh?",
+        "Các quỹ đầu tư khởi nghiệp?",
+        "Tìm cố vấn Khởi ngiệp và đầu tư",
       ],
     },
     {
       "type": "translationLanguage",
-      "name": "Translate language",
+      "name": "Dịch ý tưởng với MatrixGPT",
       "desc": "Translate A language to B language",
       "isContinuous": false,
       "content": '\nnInstructions:\n'
@@ -53,14 +53,58 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "Translate love to chinese",
-        "Translate cute to chinese",
-        "Translate How are you to chinese",
+        "Dịch ý tưởng khởi nghiệp của bạn sang tiếng anh",
+        "Dịch ý tưởng khởi nghiệp sang tiếng Nhật",
+        "Dịch Chào bạn sang tiếng Hàn Quốc",
+      ],
+    },
+    {
+      "type": "positionInterviewer",
+      "name": "Phỏng vấn ứng viên khởi nghiệp",
+      "desc":
+      "AI interviewer. As a candidate, AI will ask you interview questions for the position",
+      "isContinuous": false,
+      "content": "\nInstructions:"
+          "\nI want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position position. I want you to only reply as the interviewer. Do not write all the conservation at once. I want you to only do the interview with me. Ask me the questions and wait for my answers. Do not write explanations. Ask me the questions one by one like an interviewer does and wait for my answers."
+          " If possible, please format it in a friendly markdown format."
+          '\n',
+      "tips": [
+        "Xin chào, tôi là lập trình viên iOS",
+        "Xin chào, tôi có chuyên môn sửa xe ô tô",
+        "Xin chào , tôi là Kế toán",
+      ],
+    },
+    {
+      "type": "travelGuide",
+      "name": "Lên kế hoạch khảo sát thị trường và du lịch",
+      "desc":
+      "Write down your location and AI will recommend attractions near you",
+      "isContinuous": false,
+      "content": "\nInstructions:"
+          "\nI want you to act as a travel guide. I will write you my location and you will suggest a place to visit near my location. In some cases, I will also give you the type of places I will visit. You will also suggest me places of similar type that are close to my first location."
+          " If possible, please format it in a friendly markdown format."
+          '\n',
+      "tips": [
+        "I am in Istanbul/Beyoğlu and I want to visit only museums.",
+      ],
+    },
+    {
+      "type": "legalAdvisor",
+      "name": "Tư vấn pháp lý",
+      "desc":
+      "AI as your legal advisor. You need to describe a legal situation and the AI will provide advice on how to handle it",
+      "isContinuous": false,
+      "content": "\nInstructions:"
+          "\nI want you to act as my legal advisor. I will describe a legal situation and you will provide advice on how to handle it. You should only reply with your advice, and nothing else. Do not write explanations."
+          " If possible, please format it in a friendly markdown format."
+          '\n',
+      "tips": [
+        'Tư vấn pháp lý về đầu tư trái phiếu',
       ],
     },
     {
       "type": "englishTranslatorAndImprover",
-      "name": "English Translator and Improver",
+      "name": "Dịch nâng cao tiếng Anh",
       "desc": "English translation, spell checking and rhetorical improvement",
       "isContinuous": false,
       "content": "\nInstructions:"
@@ -68,13 +112,13 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "I want to keep a cat",
-        "Look! It's a husky!",
+        "Viết lại ý tưởng sang tiếng anh hàn lâm, xúc tích",
+        "Chào bạn! Tôi có ý tưởng đặc biệt",
       ],
     },
     {
       "type": "frontEndHelper",
-      "name": "Front-end Helper",
+      "name": "Lập trình Frontend",
       "desc": "Act as a front-end helper",
       "isContinuous": false,
       "content": '\nnInstructions:\n'
@@ -82,12 +126,12 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "JavaScript array deduplication",
+        "Viết code bằng html javascript cho website giới thiệu",
       ],
     },
     {
       "type": "linuxTerminal",
-      "name": "Act as a Linux Terminal",
+      "name": "Xây dựng hệ thống với Linux",
       "desc":
           "AI linux terminal. Enter the command and the AI will reply with what the terminal should display",
       "isContinuous": false,
@@ -101,24 +145,8 @@ class ChatGPT {
       ],
     },
     {
-      "type": "positionInterviewer",
-      "name": "Act as position Interviewer",
-      "desc":
-          "AI interviewer. As a candidate, AI will ask you interview questions for the position",
-      "isContinuous": false,
-      "content": "\nInstructions:"
-          "\nI want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position position. I want you to only reply as the interviewer. Do not write all the conservation at once. I want you to only do the interview with me. Ask me the questions and wait for my answers. Do not write explanations. Ask me the questions one by one like an interviewer does and wait for my answers."
-          " If possible, please format it in a friendly markdown format."
-          '\n',
-      "tips": [
-        "Hello, I'm a front-end development engineer",
-        "Hello, I'm a car maintenance man",
-        "Hello, I'm a financial officer",
-      ],
-    },
-    {
       "type": "javaScriptConsole",
-      "name": "Act as a JavaScript Console",
+      "name": "Hỗ trợ Lập trình Javascript",
       "desc":
           "As javascript console. Type the command and the AI will reply with what the javascript console should show",
       "isContinuous": false,
@@ -133,7 +161,7 @@ class ChatGPT {
     },
     {
       "type": "excelSheet",
-      "name": "Act as an Excel Sheet",
+      "name": "Hỗ trợ Excel",
       "desc":
           "Acts as a text-based excel. You'll only respond to my text-based 10-row Excel sheet with row numbers and cell letters as columns (A through L)",
       "isContinuous": false,
@@ -147,7 +175,7 @@ class ChatGPT {
     },
     {
       "type": "spokenEnglishTeacher",
-      "name": "Act as a Spoken English Teacher and Improver",
+      "name": "Học tiếng Anh với MatrixGPT",
       "desc":
           "Talk to AI in English, AI will reply you in English to practice your English speaking",
       "isContinuous": false,
@@ -160,22 +188,8 @@ class ChatGPT {
       ],
     },
     {
-      "type": "travelGuide",
-      "name": "Act as a Travel Guide",
-      "desc":
-          "Write down your location and AI will recommend attractions near you",
-      "isContinuous": false,
-      "content": "\nInstructions:"
-          "\nI want you to act as a travel guide. I will write you my location and you will suggest a place to visit near my location. In some cases, I will also give you the type of places I will visit. You will also suggest me places of similar type that are close to my first location."
-          " If possible, please format it in a friendly markdown format."
-          '\n',
-      "tips": [
-        "I am in Istanbul/Beyoğlu and I want to visit only museums.",
-      ],
-    },
-    {
       "type": "storyteller",
-      "name": "Act as a Storyteller",
+      "name": "Viết kịch bản truyện",
       "desc":
           "AI will come up with interesting stories that are engaging, imaginative and captivating to the audience",
       "isContinuous": false,
@@ -184,12 +198,12 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "I need an interesting story on perseverance.",
+        "Tôi muốn viết câu chuyện về du hành mặt trăng ",
       ],
     },
     {
       "type": "novelist",
-      "name": "Act as a Novelist",
+      "name": "Viêt kịch bản tiểu thuyết ly kì ",
       "desc":
           "AI plays a novelist. You'll come up with creative and engaging stories",
       "isContinuous": false,
@@ -198,21 +212,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        'I need to write a science-fiction novel set in the future.',
-      ],
-    },
-    {
-      "type": "legalAdvisor",
-      "name": "Act as a Legal Advisor",
-      "desc":
-          "AI as your legal advisor. You need to describe a legal situation and the AI will provide advice on how to handle it",
-      "isContinuous": false,
-      "content": "\nInstructions:"
-          "\nI want you to act as my legal advisor. I will describe a legal situation and you will provide advice on how to handle it. You should only reply with your advice, and nothing else. Do not write explanations."
-          " If possible, please format it in a friendly markdown format."
-          '\n',
-      "tips": [
-        'I’m making surrealistic portrait paintings',
+        'Viết cho tôi câu chuyện loài người 100 năm nữa',
       ],
     },
   ];

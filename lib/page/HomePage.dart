@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                       _renderChatListWidget(
                         store.homeHistoryList,
                       ),
-                    _renderTitle('Chat Model'),
+                    _renderTitle('MatrixGPT -  AI for Startup'),
                     _renderChatModelListWidget(),
                   ],
                 ),

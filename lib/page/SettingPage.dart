@@ -373,7 +373,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        '* The AI Chat APP does not collect this key.',
+                        '* The MatrixGPT  APP does not collect this key.',
                         textAlign: TextAlign.start,
                         softWrap: true,
                         style: TextStyle(
