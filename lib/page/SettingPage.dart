@@ -104,19 +104,29 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
               child: Column(
                 children: [
                   renderItemWidget(
+                    'images/visualgpt.png',
+                    Colors.red,
+                    32,
+                    'Visual MatrixGPT',
+                    () {
+                      final Uri url = Uri.parse('https://visual.matrix.com.vn/');
+                      Utils.launchURL(url);
+                    },
+                  ),
+                  renderItemWidget(
                     'images/privacy_policy_icon.png',
                     Colors.red,
                     32,
-                    'Privacy Policy',
-                    () {
-                      final Uri url = Uri.parse('https://wewehao.github.io/Privacy/privacy.html');
+                    'Privacy',
+                        () {
+                      final Uri url = Uri.parse('https://oanhcuongdo.github.io/matrixgpt/');
                       Utils.launchURL(url);
                     },
                   ),
                   // renderItemWidget('images/share_icon.png', Colors.green, 26, 'Share App', () {
                   //   Share.share(
                   //     Platform.isAndroid
-                  //         ? 'https://play.google.com/store/apps/details?id=com.wewehao.aichat'
+                  //         ? 'https://play.google.com/store/apps/details?id=com.matrix.aichat'
                   //         : "https://apps.apple.com/app/id***",
                   //   );
                   // },),
@@ -200,7 +210,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       _showCustomOpenAIKeyDialog();
                     },
                   ),
-                  renderItemWidget(
+/*                  renderItemWidget(
                     'images/url_icon.png',
                     Colors.deepPurpleAccent,
                     26,
@@ -210,7 +220,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       _urlTextEditingController.text = cacheUrl;
                       _showCustomOpenAIUrlDialog();
                     },
-                  ),
+                  ),*/
 
                   /// Empty storage
                   if (Config.isDebug)

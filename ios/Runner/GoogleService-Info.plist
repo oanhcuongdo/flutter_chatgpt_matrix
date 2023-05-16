@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.wewehao.aichat</string>
+	<string>com.matrix.aichat</string>
 	<key>PROJECT_ID</key>
 	<string>matrixgpt-chat-to-invest</string>
 	<key>STORAGE_BUCKET</key>

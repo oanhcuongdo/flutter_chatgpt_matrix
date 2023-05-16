@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA8rRZXJMVqaTp5UOW8zMcGj9wNs8G2VQw',
-    appId: '1:1035872171391:android:0fb5a2a9a1dc211d55164a',
+    appId: '1:1035872171391:android:a8d1e7bd0145f45155164a',
     messagingSenderId: '1035872171391',
     projectId: 'matrixgpt-chat-to-invest',
     storageBucket: 'matrixgpt-chat-to-invest.appspot.com',
@@ -62,12 +62,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBn_p-Yk-SiTCP4KJG_6TF2pX_mN7z5qU0',
-    appId: '1:1035872171391:ios:7c7d0bcaf4e4ee7355164a',
+    appId: '1:1035872171391:ios:829ed870ab5088a655164a',
     messagingSenderId: '1035872171391',
     projectId: 'matrixgpt-chat-to-invest',
     storageBucket: 'matrixgpt-chat-to-invest.appspot.com',
-    iosClientId: '1035872171391-iei1s7ohkbrgv0o8q7gil1vfqn69rt2u.apps.googleusercontent.com',
-    iosBundleId: 'com.wewehao.aichat',
+    iosClientId: '1035872171391-17ka8srmpbco9jhs0i5sfagcne9sp53c.apps.googleusercontent.com',
+    iosBundleId: 'com.matrix.aichat',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,6 +77,6 @@ class DefaultFirebaseOptions {
     projectId: 'matrixgpt-chat-to-invest',
     storageBucket: 'matrixgpt-chat-to-invest.appspot.com',
     iosClientId: '1035872171391-stc7lloi43a17n8rv8eapqa4hg3i9mas.apps.googleusercontent.com',
-    iosBundleId: 'com.wewehao.flutterChatgptMatrix',
+    iosBundleId: 'com.matrix.aichat',
   );
 }

@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1035872171391:android:a8d1e7bd0145f45155164a",
+        "android_client_info": {
+          "package_name": "com.matrix.aichat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035872171391-3c8jgnb7esnnasb5ovf6nm7orvemhkl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8rRZXJMVqaTp5UOW8zMcGj9wNs8G2VQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035872171391-3c8jgnb7esnnasb5ovf6nm7orvemhkl1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1035872171391-iei1s7ohkbrgv0o8q7gil1vfqn69rt2u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wewehao.aichat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1035872171391:android:0fb5a2a9a1dc211d55164a",
         "android_client_info": {
           "package_name": "com.wewehao.aichat"
@@ -29,6 +65,13 @@
             {
               "client_id": "1035872171391-3c8jgnb7esnnasb5ovf6nm7orvemhkl1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1035872171391-iei1s7ohkbrgv0o8q7gil1vfqn69rt2u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wewehao.aichat"
+              }
             }
           ]
         }
