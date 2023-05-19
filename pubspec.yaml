@@ -3,7 +3,7 @@ description: matrixgpt-aichat
 
 publish_to: "none"
 
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: ">=2.18.6 <3.0.0"

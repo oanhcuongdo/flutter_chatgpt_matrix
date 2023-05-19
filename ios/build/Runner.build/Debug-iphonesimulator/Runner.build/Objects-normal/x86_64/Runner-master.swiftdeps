@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "4e6cb5cfbf0dc1002b744525dcb34fcad28a50b8de9a0d6338064b309875341f"
+build_start_time: [1684412748, 364538000]
+build_end_time: [1684412749, 466815000]
+inputs:
+  "/Users/cuongdo/AndroidStudioProjects/flutter_chatgpt_matrix/ios/Runner/AppDelegate.swift": [1683386601, 803481530]

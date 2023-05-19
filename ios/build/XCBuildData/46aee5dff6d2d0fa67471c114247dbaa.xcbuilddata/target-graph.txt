@@ -1,0 +1,26 @@
+Target dependency graph (8 targets)
+Flutter in Pods, no dependencies
+flutter_tts in Pods, depends on:
+Flutter in Pods (explicit)
+path_provider_foundation in Pods, depends on:
+Flutter in Pods (explicit)
+share_plus in Pods, depends on:
+Flutter in Pods (explicit)
+shared_preferences_foundation in Pods, depends on:
+Flutter in Pods (explicit)
+url_launcher_ios in Pods, depends on:
+Flutter in Pods (explicit)
+Pods-Runner in Pods, depends on:
+Flutter in Pods (explicit)
+flutter_tts in Pods (explicit)
+path_provider_foundation in Pods (explicit)
+share_plus in Pods (explicit)
+shared_preferences_foundation in Pods (explicit)
+url_launcher_ios in Pods (explicit)
+Runner in Runner, depends on:
+Pods-Runner in Pods (implicit dependency via file 'Pods_Runner.framework' in build phase 'Link Binary')
+flutter_tts in Pods (implicit dependency via options '-framework flutter_tts' in build setting 'OTHER_LDFLAGS')
+path_provider_foundation in Pods (implicit dependency via options '-framework path_provider_foundation' in build setting 'OTHER_LDFLAGS')
+share_plus in Pods (implicit dependency via options '-framework share_plus' in build setting 'OTHER_LDFLAGS')
+shared_preferences_foundation in Pods (implicit dependency via options '-framework shared_preferences_foundation' in build setting 'OTHER_LDFLAGS')
+url_launcher_ios in Pods (implicit dependency via options '-framework url_launcher_ios' in build setting 'OTHER_LDFLAGS')

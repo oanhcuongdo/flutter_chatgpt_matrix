@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/cuongdo/AndroidStudioProjects/flutter_chatgpt_matrix/ios/build/Debug-iphonesimulator/flutter_tts/flutter_tts.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/cuongdo/AndroidStudioProjects/flutter_chatgpt_matrix/ios/build/Pods.build/Debug-iphonesimulator/flutter_tts.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/cuongdo/AndroidStudioProjects/flutter_chatgpt_matrix/ios/build/Debug-iphonesimulator/flutter_tts/flutter_tts.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "flutter_tts-Swift.h",
+      'external-contents': "/Users/cuongdo/AndroidStudioProjects/flutter_chatgpt_matrix/ios/build/Pods.build/Debug-iphonesimulator/flutter_tts.build/unextended-interface-header.h",
+    }]
+    }]
+}

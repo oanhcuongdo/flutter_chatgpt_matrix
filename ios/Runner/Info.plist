@@ -43,7 +43,7 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
     <array>
-      <string>sms</string>
+      <string>http</string>
       <string>tel</string>
       <string>https</string>
     </array>

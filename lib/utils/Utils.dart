@@ -49,10 +49,10 @@ class Utils {
     }
     return isInstall;
   }
-
+//android: externalNonBrowserApplication, ios: externalApplication
   static launchURL(
-    Uri url, {
-    LaunchMode mode = LaunchMode.externalNonBrowserApplication,
+      Uri url, {
+        LaunchMode mode = LaunchMode.externalApplication,
     Function? onLaunchFail,
   }) async {
     if (await canLaunchUrl(url)) {
