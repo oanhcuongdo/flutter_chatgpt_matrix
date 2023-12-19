@@ -1,11 +1,13 @@
-import 'package:dart_openai/openai.dart';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ChatGPT {
   static final ChatGPT _instance = ChatGPT._();
-
+  
   factory ChatGPT() => _getInstance();
 
   static ChatGPT get instance => _getInstance();
@@ -18,19 +20,19 @@ class ChatGPT {
 
   static GetStorage storage = GetStorage();
 
-  static String chatGptToken ="";
+  static String chatGptToken ="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";
       //dotenv.env['OPENAI_CHATGPT_TOKEN'] ?? ''; // token
   static String defaultModel = 'gpt-3.5-turbo';
   static List defaultRoles = [
     'system',
     'user',
-    'assistant'
+    'assistant'   
   ]; // generating | error
 
   static List chatModelList = [
     {
       "type": "chat",
-      "name": "Cố vấn Ý tưởng Startup với MatrixGPT",
+      "name": "Cố vấn Ý tưởng Startup với Matrix",
       "desc": "Trao đổi, tra cứu thông tin và lên ý tưởng",
       "isContinuous": true,
       "content": "\nInstructions:"
@@ -41,11 +43,12 @@ class ChatGPT {
         "Lên ý tưởng kinh doanh?",
         "Các quỹ đầu tư khởi nghiệp?",
         "Tìm cố vấn Khởi ngiệp và đầu tư",
+        "Nhập email, số điện thoại và tên của bạn nhé ",
       ],
     },
     {
       "type": "translationLanguage",
-      "name": "Dịch ý tưởng với MatrixGPT",
+      "name": "Dịch ý tưởng với Matrix",
       "desc": "Translate A language to B language",
       "isContinuous": false,
       "content": '\nnInstructions:\n'
@@ -53,6 +56,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Dịch ý tưởng khởi nghiệp của bạn sang tiếng anh",
         "Dịch ý tưởng khởi nghiệp sang tiếng Nhật",
         "Dịch Chào bạn sang tiếng Hàn Quốc",
@@ -69,6 +73,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Xin chào, tôi là lập trình viên iOS",
         "Xin chào, tôi có chuyên môn sửa xe ô tô",
         "Xin chào , tôi là Kế toán",
@@ -76,7 +81,7 @@ class ChatGPT {
     },
     {
       "type": "travelGuide",
-      "name": "Lên kế hoạch khảo sát thị trường và du lịch",
+      "name": "Du lịch, Khảo sát Thị trường",
       "desc":
       "Write down your location and AI will recommend attractions near you",
       "isContinuous": false,
@@ -85,12 +90,13 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
-        "I am in Istanbul/Beyoğlu and I want to visit only museums.",
+        "Nhập email, số điện thoại và tên của bạn nhé ",
+        "I am in Hanoi and I want to visit only museums.",
       ],
     },
     {
       "type": "legalAdvisor",
-      "name": "Tư vấn pháp lý",
+      "name": "Tư vấn pháp lý, Tư vấn Thuế",
       "desc":
       "AI as your legal advisor. You need to describe a legal situation and the AI will provide advice on how to handle it",
       "isContinuous": false,
@@ -99,6 +105,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         'Tư vấn pháp lý về đầu tư trái phiếu',
       ],
     },
@@ -112,6 +119,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Viết lại ý tưởng sang tiếng anh hàn lâm, xúc tích",
         "Chào bạn! Tôi có ý tưởng đặc biệt",
       ],
@@ -126,6 +134,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Viết code bằng html javascript cho website giới thiệu",
       ],
     },
@@ -170,12 +179,13 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Reply me the empty sheet",
       ],
     },
     {
       "type": "spokenEnglishTeacher",
-      "name": "Học tiếng Anh với MatrixGPT",
+      "name": "Học tiếng Anh với Matrix",
       "desc":
           "Talk to AI in English, AI will reply you in English to practice your English speaking",
       "isContinuous": false,
@@ -189,7 +199,7 @@ class ChatGPT {
     },
     {
       "type": "storyteller",
-      "name": "Viết kịch bản truyện",
+      "name": "Viết nội dung và Marketing",
       "desc":
           "AI will come up with interesting stories that are engaging, imaginative and captivating to the audience",
       "isContinuous": false,
@@ -198,12 +208,13 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         "Tôi muốn viết câu chuyện về du hành mặt trăng ",
       ],
     },
     {
       "type": "novelist",
-      "name": "Viêt kịch bản tiểu thuyết ly kì ",
+      "name": "Viết kịch bản khoa học viễn tưởng  ",
       "desc":
           "AI plays a novelist. You'll come up with creative and engaging stories",
       "isContinuous": false,
@@ -212,6 +223,7 @@ class ChatGPT {
           " If possible, please format it in a friendly markdown format."
           '\n',
       "tips": [
+        "Nhập email, số điện thoại và tên của bạn nhé ",
         'Viết cho tôi câu chuyện loài người 100 năm nữa',
       ],
     },
@@ -221,7 +233,41 @@ class ChatGPT {
     await storage.write('OpenAIKey', key);
     await initChatGPT();
   }
+  static final String backendSecretKey = 'Tlu@2023!';
+  static Future<String> getCacheOpenAIKeyFromBackend() async {
+    try {
+      // Define the backend API URL
+      final String apiBaseUrl = 'http://fbgpt.matrix.com.vn/get_key';
+      // Define the request headers with the secret key
+      final Map<String, String> headers = {
+        'Authorization': 'Bearer $backendSecretKey',
+      };
 
+      // Make the GET request to the backend API with headers
+      final response = await http.get(Uri.parse(apiBaseUrl), headers: headers);
+
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        // Parse the response as JSON
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        // Check if the 'OpenAIKey' exists in the response data
+        if (data.containsKey('OpenAIKey')) {
+          // If the 'OpenAIKey' exists, return it
+          return data['OpenAIKey'];
+        } else {
+          // If the 'OpenAIKey' doesn't exist in the response, return an empty string
+          return '';
+        }
+      } else {
+        // If the request was not successful, return an empty string
+        return '';
+      }
+    } catch (e) {
+      // If an exception occurs during the request, return an empty string
+      return '';
+    }
+  }
   static String getCacheOpenAIKey() {
     String? key = storage.read('OpenAIKey');
     if (key != null && key != '' && key != chatGptToken) {
@@ -252,10 +298,13 @@ class ChatGPT {
   }
 
   static Future<void> initChatGPT() async {
-    String cacheKey = getCacheOpenAIKey();
+    // String cacheKey = getCacheOpenAIKey();
+    String cacheKey = await getCacheOpenAIKeyFromBackend();
     String cacheUrl = getCacheOpenAIBaseUrl();
     var apiKey = cacheKey != '' ? cacheKey : chatGptToken;
     OpenAI.apiKey = apiKey;
+    chatGptToken = cacheKey;
+    debugPrint(cacheKey.toString());
     if (apiKey != chatGptToken) {
       OpenAI.baseUrl =
           cacheUrl.isNotEmpty ? cacheUrl : "https://api.openai.com";
