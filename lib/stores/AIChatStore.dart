@@ -1,35 +1,23 @@
 import 'package:aichat/utils/Chatgpt.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AIChatStore extends ChangeNotifier {
+  late final String wordpressUrl;
+  late final String wordpressApiEndpoint;
+
+  final String username = 'beenet';
+
   AIChatStore() {
+    wordpressUrl = 'https://beenet.vn/wp-json/wp/v2';
+    wordpressApiEndpoint = '$wordpressUrl/posts';
     syncStorage();
   }
 
   String chatListKey = 'chatList';
-/*
-chat
-{
-  id: Uuid.v4(),
-  ai: {
-    type: "chat",
-    name: "MatrixGPT ",
-    "isContinuous": false,
-  },
-  systemMessage: {
-    role: "system",
-    content: "Instructions: ",
-  },
-  messages: [
-    {
-      role: "user",
-      content: "你是谁",
-    },
-  ],
-  createdTime: 0,
-  updatedTime: 0,
-}
-*/
   List chatList = [];
 
   get sortChatList {
@@ -69,7 +57,7 @@ chat
 
   Future deleteChatById(String chatId) async {
     Map? cacheChat = chatList.firstWhere(
-      (v) => v['id'] == chatId,
+          (v) => v['id'] == chatId,
       orElse: () => null,
     );
     if (cacheChat != null) {
@@ -101,10 +89,9 @@ chat
     notifyListeners();
   }
 
-  /// Initialize the page to get data
   Map getChatById(String chatType, String chatId) {
     Map? chat = chatList.firstWhere(
-      (v) => v['id'] == chatId,
+          (v) => v['id'] == chatId,
       orElse: () => null,
     );
 
@@ -117,7 +104,7 @@ chat
 
   Future<Map> pushMessage(Map chat, Map message) async {
     Map? cacheHistory = chatList.firstWhere(
-      (v) => v['id'] == chat['id'],
+          (v) => v['id'] == chat['id'],
       orElse: () => null,
     );
     int timestamp = DateTime.now().millisecondsSinceEpoch;
@@ -126,10 +113,15 @@ chat
       cacheHistory['messages'].add(message);
       cacheHistory['updatedTime'] = timestamp;
       chatList.add(cacheHistory);
+
       await ChatGPT.storage.write(chatListKey, chatList);
       notifyListeners();
+
+      await postNearestHistoryToWordPress();
+
       return cacheHistory;
     }
+
     cacheHistory = chat;
     cacheHistory['messages'].add(message);
     cacheHistory['updatedTime'] = timestamp;
@@ -142,7 +134,7 @@ chat
 
   Future replaceMessage(String chatId, int messageIndex, Map message) async {
     Map? chat = chatList.firstWhere(
-      (v) => v['id'] == chatId,
+          (v) => v['id'] == chatId,
       orElse: () => null,
     );
     if (chat != null) {
@@ -180,5 +172,66 @@ chat
       ChatGPT.storage.write(chatListKey, chatList);
       notifyListeners();
     }
+  }
+
+  Future<void> postNearestHistoryToWordPress() async {
+    final nearestChat = sortChatList.isNotEmpty ? sortChatList.first : null;
+
+    if (nearestChat != null) {
+      final String title = '${nearestChat['ai']['name']} - ${_formatTimestamp(nearestChat['updatedTime'])}';
+      final List<Map<String, String>> messages = List.from(nearestChat['messages'])
+          .map<Map<String, String>>((message) => {'role': message['role'], 'content': message['content']})
+          .toList();
+
+      final Map<String, dynamic> postData = {
+        'title': title,
+        'content': _buildContentFromMessages(messages),
+      };
+
+      try {
+        final http.Response response = await http.post(
+          Uri.parse(wordpressApiEndpoint),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ${base64Encode(utf8.encode('$username:$password'))}',
+          },
+          body: jsonEncode(postData),
+        );
+
+        if (response.statusCode == 201) {
+          print('Post to WordPress successful!');
+          showToast('Post to WordPress successful!', ToastGravity.BOTTOM);
+        } else {
+          print('Failed to post to WordPress. Status code: ${response.statusCode}');
+          print('Response body: ${response.body}');
+          showToast('Failed to post to WordPress', ToastGravity.BOTTOM);
+        }
+      } catch (error) {
+        print('Error posting to WordPress: $error');
+        showToast('Error posting to WordPress', ToastGravity.BOTTOM);
+      }
+    } else {
+      print('No chat history available to post.');
+      showToast('No chat history available to post', ToastGravity.BOTTOM);
+    }
+  }
+
+  String _formatTimestamp(int timestamp) {
+    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    return '${dateTime.hour}-${dateTime.minute}-${dateTime.day}-${dateTime.month}-${dateTime.year}';
+  }
+
+  String _buildContentFromMessages(List<Map<String, String>> messages) {
+    return messages.map<String>((message) => '[${message['role']}] ${message['content']}').join('\n');
+  }
+
+  void showToast(String message, ToastGravity gravity) {
+    Fluttertoast.showToast(
+      msg: message,
+      gravity: gravity,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+    );
   }
 }
